@@ -1,32 +1,221 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>台中市西屯區郵局&加油站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
     <style>
-       #map {
-        height: 400px;
-        width: 100%;
-       }
+    
+      #map {
+        height: 100%;
+      }
+     
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
     </style>
   </head>
   <body>
-    <h3>My Google Maps Demo</h3>
     <div id="map"></div>
-<script>
+    <script>
+      var map;
       function initMap() {
-        var uluru = {lat: 24.179411, lng: 120.646819};
-        var map = new 
-          google.maps.Map(document.getElementById('map'), {
-            zoom: 16,
-            center: uluru
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 16,
+          center: new google.maps.LatLng(24.183459, 120626931),
+          mapTypeId: 'roadmap'
+        });
+
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+        var icons = {
+          postoffice: {
+		  name:'Postoffice'
+            icon: iconBase + 'postoffice_maps.png'
+          },
+          gas: {
+		  name:'Gas'
+            icon: iconBase + 'gas_maps.png'
+        };
+
+        var features = [
+       {
+           position: new google.maps.LatLng(24.179045, 120.601643),
+            type: 'postoffice', message: '東海大學郵局　地址：臺中市西屯區臺灣大道4段1727號(東海大學內)'
+          },
+          {
+           position: new google.maps.LatLng(24.175275, 120.649134),
+            type: 'postoffice', message: '臺中逢甲郵局　地址：臺中市西屯區河南路2段268號'
+          },
+          {
+           position: new google.maps.LatLng(24.176695, 120.637655),
+            type: 'postoffice', message: '臺中西屯郵局	地址：臺中市西屯區黎明路3段130號'
+          },
+          {
+           position: new google.maps.LatLng(24.164629, 120.654206),
+            type: 'postoffice', message: '臺中何厝郵局	地址：臺中市西屯區青海路1段83號'
+          },
+          {
+           position: new google.maps.LatLng(24.169492, 120.606564),
+            type: 'postoffice', message: '臺中工業區郵局　地址：臺中市西屯區工業區六路10號'
+          },
+          {
+           position: new google.maps.LatLng(24.183960, 120.604835),
+            type: 'postoffice', message: '臺中榮總郵局　地址：臺中市西屯區臺灣大道4段1650號(台中榮總內)'
+          },
+          {
+           position: new google.maps.LatLng(24.190487, 120.612215),
+            type: 'postoffice', message: '臺中永安郵局　地址：臺中市西屯區永安里西屯路3段166-80號'
+          },
+          {
+           position: new google.maps.LatLng(24.156534, 120.652868),
+            type: 'postoffice', message: '臺中大隆路郵局　地址：臺中市西屯區大隆路60、62號'
+          },
+          {
+           position: new google.maps.LatLng(24.183418, 120.618614),
+            type: 'postoffice', message: '臺中福安郵局　地址：臺中市西屯區福順路318號'
+          },
+          {
+           position: new google.maps.LatLng(24.183089, 120.614590),
+            type: 'gas', message: '台中工業區加油加氣站　地址：台中市福和里臺灣大道四段1047號'
+          },
+          {
+           position: new google.maps.LatLng(24.171330, 120.643930),
+            type: 'gas', message: '青海路站　地址：台中市青海路二段211號'
+          },
+          {
+           position: new google.maps.LatLng(24.162809, 120.650083),
+            type: 'gas', message: '文心路站　地址：台中市文心路三段2號'
+          },
+          {
+           position: new google.maps.LatLng(24.182708, 120.601047),
+            type: 'gas', message: '東大站　地址：台中市福聯里臺灣大道四段1832號'
+          },
+          {
+           position: new google.maps.LatLng(24.166202, 120.618903),
+            type: 'gas', message: '安和站　地址：台中市安和路51-8號'
+          },
+          {
+           position: new google.maps.LatLng(24.172085, 120.645463),
+            type: 'gas', message: '河南路站　地址：台中市河南路二段341號'
+          },
+          {
+           position: new google.maps.LatLng(24.202117, 120.654423),
+            type: 'gas', message: '中清站　地址：台中市中清路三段150號'
+          },
+          {
+           position: new google.maps.LatLng(24.184313, 120.590666),
+            type: 'gas', message: '大度山　地址：台中市福聯里臺灣大道五段142號1樓'
+          },
+          {
+           position: new google.maps.LatLng(24.198336, 120.642635),
+            type: 'gas', message: '光明路站　地址：台中市廣福路191號'
+          },
+          {
+           position: new google.maps.LatLng(24.199850, 120.655390),
+            type: 'gas', message: '員村中清路站　地址：台中市中清路三段1號'
+          },
+          {
+           position: new google.maps.LatLng(24.192628, 120.623168),
+            type: 'gas', message: '長安站　地址：台中市福雅路300號'
+          },
+          {
+           position: new google.maps.LatLng(24.174964, 120.604328),
+            type: 'gas', message: '年豐棧站　地址：台中市工業八路2號'
+          },
+          {
+           position: new google.maps.LatLng(24.162490, 120.628142),
+            type: 'gas', message: '安祥站　地址：台中市環中路3段800號'
+          },
+          {
+           position: new google.maps.LatLng(24.187788, 120.618528),
+            type: 'gas', message: '北基世貿站　地址：台中市福康路199號'
+          },
+          {
+           position: new google.maps.LatLng(24.180124, 120.632489),
+            type: 'gas', message: '光凰站　地址：台中市福科路110號'
+          },
+          {
+           position: new google.maps.LatLng(24.171493, 120.659822),
+            type: 'gas', message: '文華站　地址：台中市文心路3段187號'
+          },
+          {
+           position: new google.maps.LatLng(24.161802, 120.650516),
+            type: 'gas', message: '北基中港站　地址：台中市台灣大道2段917號'
+          },
+          {
+           position: new google.maps.LatLng(24.201747, 120.610414),
+            type: 'gas', message: '中科站　地址：台中市林厝里東大路一段1220號'
+          },
+          {
+           position: new google.maps.LatLng(24.195167, 120.644256),
+            type: 'gas', message: '統一精工廣福站　地址：台中市環中路二段698號'
+          },
+          {
+           position: new google.maps.LatLng(24.200713, 120.656976),
+            type: 'gas', message: '恩光中清交流道站　地址：台中市環中路一段2490號'
+          },
+          {
+           position: new google.maps.LatLng(24.205820, 120.628998),
+            type: 'gas', message: '福雅加油站站　地址：台中市林厝里福雅路693號'
+          },
+          {
+           position: new google.maps.LatLng(24.207975, 120.651226),
+            type: 'gas', message: '全國大雅交流道站　地址：台中市中清路三段457號'
+          },
+          {
+           position: new google.maps.LatLng(24.173853, 120.659992),
+            type: 'gas', message: '台亞大鵬站　地址：台中市大河里河南路二段35號1樓'
+          },
+          {
+           position: new google.maps.LatLng(24.183722, 120.629844),
+            type: 'gas', message: '福懋永安站　地址：台中市西屯路三段90-28號'
+          },
+          {
+           position: new google.maps.LatLng(24.165487, 120.645220),
+            type: 'gas', message: '全國中港交流道站　地址：台中市台中港路二段98號'
+          },
+          {
+           position: new google.maps.LatLng(24.179365, 120.634390),
+            type: 'gas', message: '環中站　地址：台中市環中路2段1286號'
+          },
+          {
+           position: new google.maps.LatLng(24.165992, 120.618558),
+            type: 'gas', message: '台亞安和路站　地址：台中市安和路49-5號'
+          },
+          {
+           position: new google.maps.LatLng(24.182372, 120.633628),
+            type: 'gas', message: '全國西屯站　地址：台中市西屯路三段77-3號'
+          },
+          {
+           position: new google.maps.LatLng(24.201566, 120.663214),
+            type: 'gas', message: '西歐中清交站　地址：台中市環中路1段1670號'
+          },
+          {
+           position: new google.maps.LatLng(24.170542, 120.632086),
+            type: 'gas', message: '朝馬站　地址：台中市環中路3段96號'
+          },
+        ];
+
+        // Create markers.
+        features.forEach(function(feature) {
+          var marker = new google.maps.Marker({
+            position: feature.position,
+            icon: icons[feature.type].icon,
+            map: map
           });
-         var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
+		  var infowindow = new google.maps.InfoWindow({
+            content: feature.message
+          });
+          google.maps.event.addListener(marker, 'mouseover', function() {
+          infowindow.open(marker.get('map'), marker)
+          });
         });
       }
     </script>
     <script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPZELgfcTFkWFPVeA2ng-NFdM2ib2V4ic&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPZELgfcTFkWFPVeA2ng-NFdM2ib2V4ic&callback=initMap">
     </script>
   </body>
 </html>
